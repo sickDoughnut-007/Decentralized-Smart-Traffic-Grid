@@ -5,7 +5,7 @@ import random
 import threading
 
 # --- CONFIGURATION ---
-SERVER_IP = "100.106.129.79"  
+SERVER_IP = "100.X.X.X"  
 SERVER_PORT = 5005
 NUM_NODES = 50           # Number of virtual intersections per laptop
 GRID_ZONE = "North_City_Grid" 
