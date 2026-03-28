@@ -46,7 +46,7 @@ def simulate_node(node_id):
         except Exception as e:
             pass # Ignore dropouts to keep the stress test running
 
-# Spawn 50 simultaneous threads (one for each virtual node)
+# Spawn 50 simultaneous threads, one for each virtual node
 for i in range(1, NUM_NODES + 1):
     threading.Thread(target=simulate_node, args=(i,), daemon=True).start()
 
