@@ -30,3 +30,11 @@ python3 pi_node.py
 
 ## Phase 1 Stress Test
 Successfully load-tested with a 101-node multi-threaded simulation, proving the central Ubuntu server can seamlessly multiplex asynchronous UDP traffic from distributed metropolitan zones without frame drops.
+
+## 🚀 Phase 2: Enterprise Hybrid Architecture
+To scale the network for a true smart-city deployment, the system was upgraded to a **Hybrid Control Plane** featuring localized state machines, asymmetric encryption, and massive swarm handling.
+
+* **4-Way Mutex State Machine (`pi_node_4way.py`):** Replaced the basic reactive loop with a non-blocking Mutex lock. The edge node simulates a full 4-way intersection (North/South vs. East/West), guaranteeing safe yellow-light transitions and strictly preventing cross-traffic collisions via mutual exclusion.
+* **The Hybrid Network (UDP + TCP/SSL):** * **The Data Plane (UDP):** A high-speed, fire-and-forget UDP socket continuously streams complex, nested JSON sensor arrays to the central server.
+  * **The Control Plane (TCP + TLS):** A secondary, highly secure TCP socket wrapped in an **RSA-4096 SSL certificate**. This allows the central server to send guaranteed, encrypted override commands (e.g., `FORCE_NS_GREEN` for emergency vehicles) that dynamically hijack the local Mutex lock.
+* **Swarm Benchmarking (`stress_launcher_4way.py`):** Developed a multi-threaded swarm launcher to evaluate server load. The system successfully multiplexed over 100 virtual intersections across discrete namespaces (`Sector_Alpha`, `Sector_Beta`), executing thousands of non-colliding Mutex payloads without dropping a single UDP frame.
