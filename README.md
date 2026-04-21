@@ -32,6 +32,7 @@ python3 pi_node_4way.py
 
 # 3. [Terminal 2] Initialize the TCP+SSL Control Plane (Encrypted Overrides)
 python3 pi_ssl_client.py
+```
 
 ## Phase 2: Enterprise Hybrid Architecture
 To scale the network for a true smart-city deployment, the system was upgraded to a **Hybrid Control Plane** featuring localized state machines, asymmetric encryption, and massive swarm handling.
