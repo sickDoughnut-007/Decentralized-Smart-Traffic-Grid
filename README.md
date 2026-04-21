@@ -14,22 +14,24 @@ A decentralized, smart traffic management system that replaces vulnerable centra
 * **Transport Layer:** Custom asynchronous UDP sockets for high-throughput IoT telemetry.
 * **Data Serialization:** Lightweight JSON payloads for self-documenting, cross-platform compatibility.
 
-## Hardware Deployment: Headless Edge Node
+### Hardware Deployment: Headless Edge Node
+
 To maximize the Raspberry Pi's compute resources and emulate a true remote IoT deployment, the edge node was configured in **Headless Mode**. 
 
-We eliminated the need for a physical monitor or peripherals at the intersection. All system administration, code deployment, and script execution were handled entirely via remote shell commands using **SSH (Secure Shell)** routed through the Tailscale Zero-Trust network.
+We eliminated the need for a physical monitor, keyboard, or peripherals at the intersection. All system administration, code deployment, and multi-threaded script execution were handled entirely via remote shell commands using **SSH (Secure Shell)** over a localized high-speed network.
 
 **Deployment Command Sequence:**
+Because the Phase 2 architecture utilizes a Hybrid Control Plane, the edge node requires dual-process execution to handle both telemetry and secure administrative overrides simultaneously.
+
 ```bash
-# 1. Securely connect to the Edge Node via Tailscale IP
-ssh pi@100.X.X.X
+# 1. Securely connect to the Edge Node via local network mDNS
+ssh akshay@akshayraspberrypi.local
 
-# 2. Execute the traffic logic script remotely
-python3 pi_node.py
-```
+# 2. [Terminal 1] Initialize the UDP Data Plane (4-Way Mutex Logic)
+python3 pi_node_4way.py
 
-## Phase 1 Stress Test
-Successfully load-tested with a 101-node multi-threaded simulation, proving the central Ubuntu server can seamlessly multiplex asynchronous UDP traffic from distributed metropolitan zones without frame drops.
+# 3. [Terminal 2] Initialize the TCP+SSL Control Plane (Encrypted Overrides)
+python3 pi_ssl_client.py
 
 ## Phase 2: Enterprise Hybrid Architecture
 To scale the network for a true smart-city deployment, the system was upgraded to a **Hybrid Control Plane** featuring localized state machines, asymmetric encryption, and massive swarm handling.
